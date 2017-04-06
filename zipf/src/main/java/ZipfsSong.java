@@ -30,33 +30,30 @@ public class ZipfsSong {
         Collections.sort(songArrayList);
 
         for (int i = 0; i < n; i++) {
-            System.out.println(songArrayList.get(i).title);
+            System.out.println(songArrayList.get(i).getTitle());
         }
 
     }
 }
 
 class Song implements Comparable<Song> {
-    static AtomicLong seq = new AtomicLong();
-    long seqNum = seq.getAndIncrement();
-    double quality;
-    String title;
+
+    private double quality;
+    private String title;
 
     public Song(String title, double quality) {
-
         this.title = title;
-
         this.quality = quality;
     }
 
     @Override
     public int compareTo(Song o2) {
-        if (this.quality < o2.quality) {
+        if (this.quality < o2.getQuality()) {
             return 1;
-        } else if (this.quality > o2.quality) {
+        } else if (this.quality > o2.getQuality()) {
             return -1;
         } else {
-            return (this.seqNum <o2.seqNum ? -1 : 1);
+            return 0;
         }
     }
 
@@ -66,5 +63,21 @@ class Song implements Comparable<Song> {
                 ", quality=" + quality +
                 ", title='" + title + '\'' +
                 '}';
+    }
+
+    public double getQuality() {
+        return quality;
+    }
+
+    public void setQuality(double quality) {
+        this.quality = quality;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
